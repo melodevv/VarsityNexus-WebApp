@@ -2,7 +2,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 
-[assembly: OwinStartup(typeof(VarsityNexusApp.Program))]
+
 namespace VarsityNexusApp
 {
     public class Program
@@ -29,7 +29,7 @@ namespace VarsityNexusApp
             }
 
             app.UseSession();
-            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

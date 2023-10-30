@@ -1,53 +1,86 @@
 ﻿@model VarsityNexusApp.Models.UserModel
 
 @{
+    Layout = "_AccountLayout";
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
+@* <div class="row">
+<div class="col-md-4">
+<form asp-action="Register">
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-group">
+<label asp-for="Name" class="control-label"></label>
+<input asp-for="Name" class="form-control" />
+<span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="Email" class="control-label"></label>
+<input asp-for="Email" class="form-control" />
+<span asp-validation-for="Email" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="Password" class="control-label"></label>
+<input asp-for="Password" class="form-control" />
+<span asp-validation-for="Password" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="CPassword" class="control-label"></label>
+<input asp-for="CPassword" class="form-control" />
+<span asp-validation-for="CPassword" class="text-danger"></span>
+</div>
+<div class="form-group">
+<input type="submit" value="Create" class="btn btn-primary" />
+</div>
+</form>
+</div>
+</div> *@
 
-<h4>UserModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Register">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="id" class="control-label"></label>
-                <input asp-for="id" class="form-control" />
-                <span asp-validation-for="id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CPassword" class="control-label"></label>
-                <input asp-for="CPassword" class="form-control" />
-                <span asp-validation-for="CPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+<!-- sign up form -->
+<form asp-action="Register" id="sign-up-form" class="auth-form">
+    <div class="auth-form__header">
+        <h1>Create your account</h1>
+        <p>And step into the action of making<br>
+            your goal to being a graduate a reality.
+        </p>
+        <br>
     </div>
-</div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group form-group--2-col">
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CPassword" class="control-label"></label>
+            <input asp-for="CPassword" class="form-control" />
+            <span asp-validation-for="CPassword" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="auth-form__footer">
+        <button type="submit" value="Create">Sign Up</button>
+        <p>
+            Already got an account?
+            <a asp-action="Login" id="login-btn" type="button">Sign in</a>
+        </p>
+    </div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
