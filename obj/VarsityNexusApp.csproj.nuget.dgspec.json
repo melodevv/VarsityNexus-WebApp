@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\l224\\Documents\\GitHub\\VarsityNexus-WebApp\\VarsityNexusApp.csproj": {}
+    "C:\\Users\\l224\\Desktop\\VarsityNexus-WebApp\\VarsityNexusApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\l224\\Documents\\GitHub\\VarsityNexus-WebApp\\VarsityNexusApp.csproj": {
+    "C:\\Users\\l224\\Desktop\\VarsityNexus-WebApp\\VarsityNexusApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\l224\\Documents\\GitHub\\VarsityNexus-WebApp\\VarsityNexusApp.csproj",
+        "projectUniqueName": "C:\\Users\\l224\\Desktop\\VarsityNexus-WebApp\\VarsityNexusApp.csproj",
         "projectName": "VarsityNexusApp",
-        "projectPath": "C:\\Users\\l224\\Documents\\GitHub\\VarsityNexus-WebApp\\VarsityNexusApp.csproj",
+        "projectPath": "C:\\Users\\l224\\Desktop\\VarsityNexus-WebApp\\VarsityNexusApp.csproj",
         "packagesPath": "C:\\Users\\l224\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\l224\\Documents\\GitHub\\VarsityNexus-WebApp\\obj\\",
+        "outputPath": "C:\\Users\\l224\\Desktop\\VarsityNexus-WebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -46,9 +46,37 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Firebase.Auth": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "FirebaseAdmin": {
               "target": "Package",
               "version": "[2.4.0, )"
+            },
+            "Microsoft.AspNet.Identity.Owin": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.Owin": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Microsoft.Owin.Host.SystemWeb": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Microsoft.Owin.Security": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Microsoft.Owin.Security.Cookies": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[7.0.10, )"
             }
           },
           "imports": [

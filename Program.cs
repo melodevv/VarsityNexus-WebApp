@@ -1,3 +1,8 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
+
+[assembly: OwinStartup(typeof(VarsityNexusApp.Program))]
 namespace VarsityNexusApp
 {
     public class Program
@@ -9,6 +14,10 @@ namespace VarsityNexusApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            //This is so session package to work
+            builder.Services.AddMvc().AddSessionStateTempDataProvider();
+            builder.Services.AddSession();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -19,12 +28,15 @@ namespace VarsityNexusApp
                 app.UseHsts();
             }
 
+            app.UseSession();
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.MapControllerRoute(
                 name: "default",
