@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "varsity-nexus",
+  "private_key_id": "843009bba24e2fa9e6aaba5046dd4e32053d5937",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCdmcx/Au+cWZdZ\n2oSecGV8lKAIHopv/mSDivyhihbsVcSRfGa4Ki+1K+6OfQnufszBvwwmCrmKHBxB\n2fMIMB0+KIwxIU0SwCi6PeObWsY9h3wubCooWGmdyxpLGBeeE9ofdEQajVDOwVWH\nXGLCww0I7ea+oc0QsOY/wgPqesxEB7Xd/JTJ2mNLdaqClp7bf9XfDfnNQGjZ06ax\nnOsKhY4o3TFymCyqOMio+T6i2O04LcFRiAv8Hqtd1xORumO30UscvEFxDiDU/HFo\nYuq3pvM0S5mLSnI9/i80V70oLh3p7vQ3EMWwBk80fsz60zPui08RhRvTXzHFIVnM\na3eMmwFXAgMBAAECggEAAbXnbhrHb4jaOk9pIWEcCzwlYgx4sce6OWJ1XTW5z3B1\n0SrIwoPYHbd+ngl6g60kHwh1fUSRLdtPIiXXei8gcpkeesWuQibuMcPE2QslJ0Z1\nkSaZdIo8pzrDYLyh0t+8Om5Jxh8uII7z4F/qLp7O8BZBawpVEhS/khUO3PDAj5Y3\nPeU/ivDc2mNJ749mJjlPKh7H1ysruhrDUaNZZpo2naYoeKf2ZFJdhLRgor5UICF5\nnZXmTHfwPuoNZ/CRxslYGOXzXlDzVLm065IZkwRY8V4JT6iq21YSMcPJ5OH/5K5M\n79K+og+DWzf5sUjyKGg+anz0jpwgfSfPRA/Qyol4yQKBgQDKBuNWHg2XQrQYe8vW\nPgw9b+Aqz89iz/1BOzek1dIypomCX2MJLupzY1DN9YWqoyDctc/BBv5tR2g7Mon+\nNsxmvqdhADu1kgVY2fA0MUmIf3VUlmd0dPAZsJM194Xamdw8Gw3e1wVifZ+gEX/7\nufVv5Y/gwBThwXa3202kqTnKDwKBgQDHtH/mYF9+38XIgmPU+f2XQ3jD10ymBHQL\n1PnqwfWt2NMl+wNEAKjRpImnF/5HAA+etuLlpG9tK4x8DTohi/aHEXBflnw8O3fP\nmXspHoAme36aYch1o4va/vk0q676+RQooxtZC8fQ+5OZJTfw9QwAVgF+QavfE2eq\n/vxCLga8OQKBgQCcIfCmCHnmcaWv2lTxUWiyPnkXfR1At495T2O0n49gl7ZkLIXk\nff6xiIrVca+I7aOjD1vtSRNuryYNwgRFlGIp8aR34e9DZwN85ImwPHsg46hw5AA2\nT32TzRQoPBCVnh1H0nzIwJKnyICJ+5xWliPqA5dLUgeRZavzcagy3poL3wKBgQDG\nH6KL8ayL+IEFzaYxUtptSPj0ghJ+2ggu/Nn8NvT/xg6krYSt4GGbqrsN1NXlpn/Y\nm+Q6o4oQKpYzNAQp5+tqULjFfExAjVbt1HzFbIcCpp4Rl1UCsIA9gZvGz1THlHiV\nYEvvaaqRACWMV8pJ+TIw2yKcGZbjtyKwGEw3c+YmsQKBgQDCj5F/BIBgCspUYLh5\na2HyvY+zJpKfcUMBUBmwM9QKx/Qye8/X/ApgD0tyz+gW1qAI+OR56M6L2ws9Ub/L\n4ZMXgTYjLalbobQqEyQfOMdsvubS6DwITUQ5KTr5Rbh34QLfl6slC39Zs4vdDK9W\nN8aNSFuE8CBlvoT894pZ5TLXkQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "varsity-nexus@appspot.gserviceaccount.com",
+  "client_id": "102328389117442477908",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/varsity-nexus%40appspot.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

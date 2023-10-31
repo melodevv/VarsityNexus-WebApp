@@ -1,7 +1,3 @@
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-
 
 namespace VarsityNexusApp
 {

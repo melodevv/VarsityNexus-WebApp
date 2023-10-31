@@ -54,25 +54,9 @@
               "target": "Package",
               "version": "[2.4.0, )"
             },
-            "Microsoft.AspNet.Identity.Owin": {
+            "Google.Cloud.Firestore": {
               "target": "Package",
-              "version": "[2.2.4, )"
-            },
-            "Microsoft.Owin": {
-              "target": "Package",
-              "version": "[4.2.2, )"
-            },
-            "Microsoft.Owin.Host.SystemWeb": {
-              "target": "Package",
-              "version": "[4.2.2, )"
-            },
-            "Microsoft.Owin.Security": {
-              "target": "Package",
-              "version": "[4.2.2, )"
-            },
-            "Microsoft.Owin.Security.Cookies": {
-              "target": "Package",
-              "version": "[4.2.2, )"
+              "version": "[3.4.0, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",

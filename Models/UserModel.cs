@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Cloud.Firestore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,29 +7,37 @@ using System.Web;
 
 namespace VarsityNexusApp.Models
 {
+    [FirestoreData]
     public class UserModel
     {
-        [Key]
-        public int id { get; set; }
+        public string UserId { get; set; }
 
-        [Required]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        [FirestoreProperty]
+        public string DisplayName { get; set; }
 
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email")]
+        [FirestoreProperty]
         public string Email { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [FirestoreProperty]
+        public string Username { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare(nameof(Password), ErrorMessage = "Passwords don't match.")]
-        [Display(Name = "Confirm Password")]
-        public string CPassword { get; set; }
+        [FirestoreProperty]
+        public string PhotoUrl { get; set; }
+
+        [FirestoreProperty]
+        public string Location { get; set; }
+
+        [FirestoreProperty]
+        public string Bio { get; set; }
+
+        [FirestoreProperty]
+        public Timestamp SignedUpAt { get; set; }
+
+        [FirestoreProperty]
+        public Timestamp LastSeen { get; set; }
+
+        [FirestoreProperty]
+        public bool IsOnline { get; set; }
+
     }
 }
