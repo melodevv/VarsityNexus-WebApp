@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/VarsityNexusApp.props" />
-</Project>

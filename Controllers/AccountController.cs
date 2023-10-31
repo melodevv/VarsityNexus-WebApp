@@ -1,6 +1,7 @@
 ﻿using Firebase.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NuGet.Protocol;
 using VarsityNexusApp.Models;
 
@@ -22,36 +23,43 @@ namespace VarsityNexusApp.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(UserModel registerModel)
+        public async Task<IActionResult> Register(RegisterModel registerModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                //create the user
-                await auth.CreateUserWithEmailAndPasswordAsync(email: registerModel.Email, password: registerModel.Password, displayName: registerModel.Name);
-
-                //log in the new user
-                var fbAuthLink = await auth
-                                .SignInWithEmailAndPasswordAsync(registerModel.Email, registerModel.Password);
-
-                string token = fbAuthLink.FirebaseToken;
-
-                //saving the token in a session variable
-                if (token != null)
+                try
                 {
-                    HttpContext.Session.SetString("_UserToken", token);
+                    //create the user
+                    await auth.CreateUserWithEmailAndPasswordAsync(email: registerModel.Email, password: registerModel.Password, displayName: registerModel.Name);
 
-                    return RedirectToAction("Index", "Home");
+                    //log in the new user
+                    var fbAuthLink = await auth
+                                    .SignInWithEmailAndPasswordAsync(registerModel.Email, registerModel.Password);
+
+                    string token = fbAuthLink.FirebaseToken;
+
+                    //saving the token in a session variable
+                    if (token != null)
+                    {
+                        HttpContext.Session.SetString("_UserToken", token);
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
-                else
+                // TODO: Find a way to display the error messages in a popup style
+                catch (Exception e)
                 {
+                    ViewBag.Exception = ExceptionErrors(e.Message);
+                    //Create a view for displaying errors and pass the exception to it
                     return View();
                 }
             }
-            // TODO: Find a way to display the error messages in a popup style
-            catch (Exception e)
+            else
             {
-                // ViewBag.Exception = ExceptionErrors(e);
-                //Create a view for displaying errors and pass the exception to it
                 return View();
             }
         }
@@ -62,36 +70,40 @@ namespace VarsityNexusApp.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Login(UserModel userModel)
+        public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                //log in the user
-                var fbAuthLink = await auth
-                                .SignInWithEmailAndPasswordAsync(userModel.Email, userModel.Password);
-                string token = fbAuthLink.FirebaseToken;
-                //saving the token in a session variable
-                if (token != null)
+                try
                 {
-                    HttpContext.Session.SetString("_UserToken", token);
+                    //log in the user
+                    var fbAuthLink = await auth
+                                    .SignInWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
+                    string token = fbAuthLink.FirebaseToken;
+                    //saving the token in a session variable
+                    if (token != null)
+                    {
+                        HttpContext.Session.SetString("_UserToken", token);
 
-                    return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
-                else
+                // TODO: Find a way to display the error messages in a popup style
+                catch (Exception e)
                 {
+
+                    ViewBag.exception = ExceptionErrors(e.Message);
+
+                    //Create a view for displaying errors and pass the exception to it
                     return View();
                 }
             }
-            // TODO: Find a way to display the error messages in a popup style
-            catch (Exception e)
+            else
             {
-
-                // ViewBag.Exception = ExceptionErrors(e);
-                foreach (var i in e.Message.Split("{}"))
-                {
-                    Console.WriteLine(i);
-                }
-                //Create a view for displaying errors and pass the exception to it
                 return View();
             }
         }
@@ -102,22 +114,29 @@ namespace VarsityNexusApp.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> ForgotPasword(UserModel userModel)
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordModel forgotPasswordModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                //Send Reset Password Email to the user
-                await auth.SendPasswordResetEmailAsync(email: userModel.Email);
+                try
+                {
+                    //Send Reset Password Email to the user
+                    await auth.SendPasswordResetEmailAsync(email: forgotPasswordModel.Email);
 
-                //Take user to login page
-                return RedirectToAction("Login");
+                    ViewBag.Success = "Please check your Inbox for further instructions";
+                    return View();
 
+                }
+                // TODO: Find a way to display the error messages in a popup style
+                catch (Exception e)
+                {
+                    ViewBag.Exception = ExceptionErrors(e.Message);
+                    //Create a view for displaying errors and pass the exception to it
+                    return View();
+                }
             }
-            // TODO: Find a way to display the error messages in a popup style
-            catch (Exception e)
+            else
             {
-                // ViewBag.Exception = ExceptionErrors(e.Data);
-                //Create a view for displaying errors and pass the exception to it
                 return View();
             }
         }
@@ -129,14 +148,27 @@ namespace VarsityNexusApp.Controllers
             return RedirectToAction("Login");
         }
 
-        // String ExceptionErrors(dynamic e)
-        // {
-        //     if (e.Contains("INVALID_LOGIN_CREDENTIALS"))
-        //     {
-        //         return "Invalid login credentials";
-        //     }
-        //     return "DIdint work";
-        // }
+        String ExceptionErrors(String e)
+        {
+            String errorMessage = "";
+            if (e.Contains("INVALID_LOGIN_CREDENTIALS"))
+            {
+                errorMessage = "Invalid login credentials";
+            }
+            else if (e.Contains("TOO_MANY_ATTEMPTS_TRY_LATER"))
+            {
+                errorMessage = "Access to this account has been temporarily disabled due to many failed login attempts. Click Forgot Password to reset.";
+            }
+            else if (e.Contains("EMAIL_EXISTS"))
+            {
+                errorMessage = "Email already exists.";
+            }
+            else if (e.Contains("Response status code does not indicate success"))
+            {
+                errorMessage = "Please make sure your entered a correct email";
+            }
+            return errorMessage;
+        }
 
     } // End class
 }

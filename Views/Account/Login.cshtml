@@ -1,31 +1,9 @@
-﻿@model VarsityNexusApp.Models.UserModel
+﻿@model VarsityNexusApp.Models.LoginModel
 
 @{
     Layout = "_AccountLayout";
     ViewData["Title"] = "Login";
 }
-
-
-@* <div class="row">
-<div class="col-md-4">
-<form asp-action="Login">
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<div class="form-group">
-<label asp-for="Email" class="control-label"></label>
-<input asp-for="Email" class="form-control" />
-<span asp-validation-for="Email" class="text-danger"></span>
-</div>
-<div class="form-group">
-<label asp-for="Password" class="control-label"></label>
-<input asp-for="Password" class="form-control" />
-<span asp-validation-for="Password" class="text-danger"></span>
-</div>
-<div class="form-group">
-<input type="submit" value="Create" class="btn btn-primary" />
-</div>
-</form>
-</div>
-</div> *@
 
 
 <form asp-action="Login" id="login-form" class="auth-form">
@@ -36,7 +14,7 @@
             <a asp-action="Register" id="sign-up-btn" type="button">Register</a>
         </p>
     </div>
-    <div class="text-danger">@ViewBag.Exception</div>
+    <div class="text-danger" style="padding-bottom: 10px">@ViewBag.Exception</div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="Email" class="control-label"></label>
@@ -52,7 +30,7 @@
         <button type="submit" value="Create">Login</button>
         <p>
             Forgot your password?
-            <button asp-action="ForgotPassword" id="forgot-pw-btn" type="button">Click here</button>
+            <a asp-action="ForgotPassword" id="forgot-pw-btn" type="button">Click here</a>
         </p>
     </div>
 </form>

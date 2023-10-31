@@ -46,6 +46,7 @@
         </p>
         <br>
     </div>
+    <div class="text-danger" style="padding-bottom: 10px">@ViewBag.Exception</div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="Name" class="control-label"></label>
@@ -57,8 +58,7 @@
         <input asp-for="Email" class="form-control" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-    <div class="form-group form-group--2-col">
-        <div class="form-group">
+    <div class="form-group">
             <label asp-for="Password" class="control-label"></label>
             <input asp-for="Password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger"></span>
@@ -68,7 +68,6 @@
             <input asp-for="CPassword" class="form-control" />
             <span asp-validation-for="CPassword" class="text-danger"></span>
         </div>
-    </div>
     <div class="auth-form__footer">
         <button type="submit" value="Create">Sign Up</button>
         <p>
