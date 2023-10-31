@@ -8,6 +8,12 @@
     --dim-light: #d6d6d6;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html,
 body {
     width: 100vw;
@@ -15,7 +21,7 @@ body {
 }
 
 html {
-    background: url('sm-pattern.svg') center / cover no-repeat;
+    /* background: url('~/images/sm-pattern.svg') center / cover no-repeat; */
     background-color: var(--darkbackground-color);
 }
 
@@ -29,6 +35,23 @@ button {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     cursor: pointer;
+}
+
+image {
+    display: block;
+    width: 100%;
+}
+
+.mcontainer {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    height: 100vh;
+}
+
+.image-container {
+    overflow: hidden;
+    height: 100vh;
 }
 
 .page-container {

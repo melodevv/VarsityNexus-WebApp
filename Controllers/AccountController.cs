@@ -11,7 +11,7 @@ namespace VarsityNexusApp.Controllers
     public class AccountController : Controller
     {
         FirebaseAuthProvider auth;
-        private string directory = "C:\\Users\\l224\\Desktop\\VarsityNexus-WebApp\\varsity-nexus-843009bba24e.json";
+        private string directory = "varsity-nexus-843009bba24e.json";
         private string projectId;
         private FirestoreDb _firestoreDb;
 
@@ -44,7 +44,10 @@ namespace VarsityNexusApp.Controllers
                     var fbAuthLink = await auth
                                     .SignInWithEmailAndPasswordAsync(registerModel.Email, registerModel.Password);
 
+                    // get the user token
                     string token = fbAuthLink.FirebaseToken;
+
+                    // get the current logged in user
                     User currentUser = await auth.GetUserAsync(token);
 
                     //saving the token in a session variable
@@ -53,20 +56,23 @@ namespace VarsityNexusApp.Controllers
                         HttpContext.Session.SetString("_UserToken", token);
 
                         //create the user collection on users collection
-                        UserModel user = new UserModel();
-                        user.DisplayName = registerModel.Name;
-                        user.Username = "";
-                        user.Email = registerModel.Email;
-                        user.Bio = "";
-                        user.PhotoUrl = "";
-                        user.Location = "";
-                        user.UserId = currentUser.LocalId;
-                        user.IsOnline = false;
-                        user.LastSeen = Timestamp.GetCurrentTimestamp();
-                        user.SignedUpAt = Timestamp.GetCurrentTimestamp();
+                        UserModel user = new UserModel
+                        {
+                            DisplayName = registerModel.Name,
+                            Username = "",
+                            Email = registerModel.Email,
+                            Bio = "",
+                            PhotoUrl = "",
+                            Location = "",
+                            UserId = currentUser.LocalId,
+                            IsOnline = false,
+                            LastSeen = Timestamp.GetCurrentTimestamp(),
+                            SignedUpAt = Timestamp.GetCurrentTimestamp()
+                        };
 
-                        CollectionReference collectionReference = _firestoreDb.Collection("users");
-                        await collectionReference.AddAsync(user);
+                        // create the user document using the User's ID
+                        DocumentReference docRef = _firestoreDb.Collection("users").Document(currentUser.LocalId);
+                        await docRef.SetAsync(user);
 
                         return RedirectToAction("Index", "Home");
                     }

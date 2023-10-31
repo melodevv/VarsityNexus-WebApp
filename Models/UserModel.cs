@@ -10,6 +10,7 @@ namespace VarsityNexusApp.Models
     [FirestoreData]
     public class UserModel
     {
+        [FirestoreProperty]
         public string UserId { get; set; }
 
         [FirestoreProperty]
