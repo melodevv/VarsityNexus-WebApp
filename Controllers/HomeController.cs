@@ -15,15 +15,15 @@ namespace VarsityNexusApp.Controllers
 
         public IActionResult Index()
         {
-            var token = HttpContext.Session.GetString("_UserToken");
-            if (token != null)
-            {
+            //var token = HttpContext.Session.GetString("_UserToken");
+            //if (token != null)
+            //{
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
         }
 
         public IActionResult Privacy()
