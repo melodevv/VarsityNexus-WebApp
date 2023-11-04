@@ -1,4 +1,6 @@
 
+using AspNetCore.Unobtrusive.Ajax;
+
 namespace VarsityNexusApp
 {
     public class Program
@@ -13,6 +15,7 @@ namespace VarsityNexusApp
             //This is so session package to work
             builder.Services.AddMvc().AddSessionStateTempDataProvider();
             builder.Services.AddSession();
+            builder.Services.AddUnobtrusiveAjax();
 
             var app = builder.Build();
 
@@ -28,6 +31,8 @@ namespace VarsityNexusApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseUnobtrusiveAjax();
 
             app.UseRouting();
 

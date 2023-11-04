@@ -9,29 +9,30 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js">
 </head>
 
 <body>
     <div class="main-flex-container">
-        <div class="left-flex-container flex-item">
+        <div class="left-flex-container ">
+            <div class="nav-logo"><img src="./img/logo.png" alt="nexus_logo"></div>
             <div class="nav-links">
                 <ul>
-                    <img class="nav-logo" src="./img/logo.png" alt="nexus_logo">
                     <li class="nav-items current-page"><a href="#"><i class="fas fa-home"></i> Home</a></li>
                     <li class="nav-items"><a href="#"><i class="fas fa-hashtag"></i> Explore</a></li>
                     <li class="nav-items"><a href="#"><i class="far fa-bell"></i> Notifications</a></li>
                     <li class="nav-items"><a href="#"><i class="far fa-user"></i> Profile</a></li>
                 </ul>
-                <div class="tweet"><a href="#">Create Post</a></div>
             </div>
-            
+
             <div class="profile-box">
                 <img src="./img/profile.jpg" alt="profile">
                 <div class="profile-link">
-                    <p class="full-name">David Herbert</p>
+                    <a href="" class="full-name">David Herbert</a>
                     <p class="user-name">king.david</p>
                 </div>
-                <div class="options-icon"><i class="fas fa-caret-down"></i></div>
+
             </div>
         </div>
 
@@ -39,60 +40,54 @@
         @RenderBody()
 
 
-        <div class="right-flex-container flex-item">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search Nexus">
+        <div class="right-flex-container">
+
+            @using (Html.AjaxBeginForm("Search", "Home", FormMethod.Post, new AjaxOptions
+             {
+                 InsertionMode = InsertionMode.Replace,
+                 HttpMethod = "POST",
+                 UpdateTargetId = "search-results"
+             }))
+
+            {
+
+                <div class="search-container">
+                    <div> @Html.TextBox("query", null, new { placeholder = "Search For Users", @class = "search-input" })
+                    </div>
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+
+            }
+            <div id="search-results" class="search-results"
+                data-url="@Url.Action(action: "Search", controller: "Home")">
             </div>
 
-            <div class="trends">
-                <ul>
-                    <li class="nav-list header">
-                        <h2>Trending</h2>
-                        <i class="fas fa-cog">
-                        </i>
-                    <li class="nav-list">
-                        <div class="trend-list">
-                            <p class="sub-text">Trending in Bloemfontein</p>
-                            <p class="main-text">#Rugby</p>
-                            <p class="sub-text">274K posts</p>
+
+            <div class="follow">
+                <h2 class="header">Follow Suggest</h2>
+                <div class="follow-user">
+                    <div class="title-container">
+                        <div class="user-pics">
+                            <img src="./img/nsfas.jpg" alt="user6">
                         </div>
-                        <div class="trend-icon">
-                            <i class="fas fa-chevron-down"></i>
+                        <div class="usernames">
+                            <p class="display-name">Nsfas</p>
+
+                            <p class="user-name">nsfas.org.za</p>
                         </div>
-                    </li>
-                    <li class="nav-list">
-                        <div class="trend-list">
-                            <p class="sub-text">Trending in CUT</p>
-                            <p class="main-text">#Hackaton</p>
-                            <p class="sub-text">154K posts</p>
-                        </div>
-                        <div class="trend-icon">
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                    </li>
-                    <li class="nav-list">
-                        <div class="trend-list">
-                            <p class="sub-text">Trending in CUT</p>
-                            <p class="main-text">#SRC Elections</p>
-                            <p class="sub-text">135K posts</p>
-                        </div>
-                        <div class="trend-icon">
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                    </li>
-                </ul>
+
+                    </div>
+                    <div class="follow-btn"><a href="#">follow</a></div>
+                </div>
             </div>
 
             <div class="right-footer">
                 <div class="footer-links">
-                    <br>
                     <a href="#" class="sub-text">Terms</a>
                     <a href="#" class="sub-text">Privacy policy</a>
                     <a href="#" class="sub-text">Ads info</a>
                 </div>
                 <div class="footer-copyright">
-                    <br>
                     <p class="sub-text">&copy; 2023 Varsity Nexus</p>
                 </div>
 
@@ -101,9 +96,18 @@
         </div>
 
     </div>
+
+    <script>$(document).ready(function () {
+            (function () {
+                var url = $("#search-results").data("url");
+                $("#search-results").load(url);
+            })();
+        });
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/app.js" asp-append-version="true"></script>
+    @Html.RenderUnobtrusiveAjaxScript()
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

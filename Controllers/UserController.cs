@@ -1,5 +1,4 @@
 ﻿using Google.Cloud.Firestore;
-using Google.Cloud.Firestore.V1;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using VarsityNexusApp.Models;
@@ -25,7 +24,7 @@ namespace VarsityNexusApp.Controllers
             QuerySnapshot userQuerySnapshot = await usersQuery.GetSnapshotAsync();
             List<UserModel> listUsers = new List<UserModel>();
 
-            foreach(DocumentSnapshot snapshot in userQuerySnapshot.Documents)
+            foreach (DocumentSnapshot snapshot in userQuerySnapshot.Documents)
             {
                 if (snapshot.Exists)
                 {
@@ -37,12 +36,6 @@ namespace VarsityNexusApp.Controllers
                 }
             }
             return View(listUsers);
-        }
-
-        [HttpGet]
-        public IActionResult NewUser()
-        {
-            return View();
         }
     }
 }
