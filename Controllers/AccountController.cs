@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NuGet.Common;
+using VarsityNexusApp.Model;
 using VarsityNexusApp.Models;
 
 namespace VarsityNexusApp.Controllers
@@ -49,6 +50,9 @@ namespace VarsityNexusApp.Controllers
 
                     // get the current logged in user
                     User currentUser = await auth.GetUserAsync(token);
+
+                    // Set the current logged in user
+                    GlobalVariables.CurrentUser = await auth.GetUserAsync(token);
 
                     //saving the token in a session variable
                     if (token != null)
@@ -117,6 +121,11 @@ namespace VarsityNexusApp.Controllers
                                     .SignInWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
 
                     string token = fbAuthLink.FirebaseToken;
+
+                    // set the current logged in user
+                    GlobalVariables.CurrentUser = await auth.GetUserAsync(token);
+
+
                     //saving the token in a session variable
                     if (token != null)
                     {

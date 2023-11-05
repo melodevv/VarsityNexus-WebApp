@@ -22,102 +22,95 @@ namespace VarsityNexusApp.Controllers
             _firestoreDb = FirestoreDb.Create(projectId);
         }
 
-        public IActionResult Index()
+        public async Task<UserModel> GetPostOwnerModelAsync(string ownerId)
         {
-            //var token = HttpContext.Session.GetString("_UserToken");
-            //if (token != null)
-            //{
-            return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Login", "Account");
-            //}
+            UserModel user = new UserModel();
+            DocumentReference documentReference = _firestoreDb.Collection("users").Document(ownerId);
+            DocumentSnapshot documentSnapshot = await documentReference.GetSnapshotAsync();
+
+            if (documentSnapshot.Exists)
+            {
+                Dictionary<string, object> snapshotDic = documentSnapshot.ToDictionary();
+                string json = JsonConvert.SerializeObject(snapshotDic);
+                user = JsonConvert.DeserializeObject<UserModel>(json);
+            }
+            return user;
         }
 
-        public IActionResult Privacy()
+        public async Task<List<PostModel>> GetPostModelsAsync()
         {
-            return View();
-        }
+            Query postQuery = _firestoreDb.Collection("posts");
+            QuerySnapshot postQuerySnapshot = await postQuery.OrderByDescending("timestamp").GetSnapshotAsync();
+            List<PostModel> listPosts = new List<PostModel>();
 
-        public async Task<List<UserModel>> GetSearchAsync(string query)
-        {
-            Query usersQuery = _firestoreDb.Collection("users");
-            QuerySnapshot userQuerySnapshot = await usersQuery.WhereEqualTo("username", query).GetSnapshotAsync();
-            List<UserModel> listUsers = new List<UserModel>();
-
-            foreach (DocumentSnapshot snapshot in userQuerySnapshot.Documents)
+            foreach (DocumentSnapshot snapshot in postQuerySnapshot.Documents)
             {
                 if (snapshot.Exists)
                 {
                     Dictionary<string, object> user = snapshot.ToDictionary();
                     string json = JsonConvert.SerializeObject(user);
-                    UserModel newUser = JsonConvert.DeserializeObject<UserModel>(json);
-                    newUser.Id = snapshot.Id;
-                    listUsers.Add(newUser);
+                    PostModel posts = JsonConvert.DeserializeObject<PostModel>(json);
+                    posts.PostOwner = await GetPostOwnerModelAsync(posts.OwnerId);
+                    listPosts.Add(posts);
                 }
             }
-            return listUsers;
+            return listPosts;
         }
 
-        [HttpPost]
-        public async Task<PartialViewResult> Search(string query)
+        public async Task<IActionResult> Index()
         {
-            if (query != null)
+            var token = HttpContext.Session.GetString("_UserToken");
+            if (token != null)
             {
                 try
                 {
-                    List<UserModel> searchList = await GetSearchAsync(query);
-
-                    return PartialView("_SearchResultsPartial", searchList);
+                    List<PostModel> posts = await GetPostModelsAsync();
+                    return View(posts);
                 }
                 catch (Exception e)
                 {
-                    ErrorViewModel error = new ErrorViewModel();
-                    error.RequestId = e.Message;
-                    PartialView("Error", error);
+                    return View("Error");
                 }
             }
-            return PartialView("Error");
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
-        public async Task<List<UserModel>> GetFollowSuggestAsync()
+        public IActionResult Explore()
         {
-            Query usersQuery = _firestoreDb.Collection("users");
-            QuerySnapshot userQuerySnapshot = await usersQuery.GetSnapshotAsync();
-            List<UserModel> listUsers = new List<UserModel>();
-
-            foreach (DocumentSnapshot snapshot in userQuerySnapshot.Documents)
-            {
-                if (snapshot.Exists)
-                {
-                    Dictionary<string, object> user = snapshot.ToDictionary();
-                    string json = JsonConvert.SerializeObject(user);
-                    UserModel newUser = JsonConvert.DeserializeObject<UserModel>(json);
-                    newUser.Id = snapshot.Id;
-                    listUsers.Add(newUser);
-                }
-            }
-            return listUsers;
+            return View();
         }
 
         [HttpGet]
-        public async Task<PartialViewResult> FollowSuggest()
+        public async Task<IActionResult> ExploreAsync()
         {
-
             try
             {
-                List<UserModel> followSuggestList = await GetFollowSuggestAsync();
-
-                return PartialView("_FollowSuggestPartial", followSuggestList);
+                List<PostModel> posts = await GetPostModelsAsync();
+                posts.Reverse();
+                return View(posts);
             }
             catch (Exception e)
             {
-                ErrorViewModel error = new ErrorViewModel();
-                error.RequestId = e.Message;
-                PartialView("Error", error);
+                return View("Error");
             }
-            return PartialView("Error");
+        }
+
+        public IActionResult Notifications()
+        {
+            return View();
+        }
+
+        public IActionResult Message()
+        {
+            return View();
+        }
+
+        public IActionResult Profile()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

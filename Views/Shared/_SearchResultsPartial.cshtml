@@ -13,16 +13,23 @@ else
         <div class="search-user">
     <div class="title-container">
         <div class="user-pics">
-            <img src="@user.PhotoUrl" alt="user profile picture">
-        </div>
-        <div class="usernames">
-            <p class="display-name">@user.DisplayName</p>
+            @if (user.PhotoUrl == "")
+                    {
+                        <img src="https://saiuniversity.edu.in/wp-content/uploads/2021/02/default-img.jpg" alt="@user.Username[0]">
+                    }
+                    else
+                    {
+                        <img src="@user.PhotoUrl" alt="@user.Username[0]">
+                    }
+                </div>
+                <div class="usernames">
+                    <p class="display-name">@user.DisplayName</p>
 
-            <p class="user-name">@user.Username</p>
-        </div>
+                    <p class="username">@user.Username</p>
+                </div>
 
-    </div>
-    <div class="view-btn"><a href="#">View</a></div>
-</div>
+            </div>
+            <div class="view-btn"><a href="#">View</a></div>
+        </div>
     }
 }

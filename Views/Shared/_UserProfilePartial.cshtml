@@ -1,0 +1,16 @@
+@using Microsoft.AspNetCore.Server.Kestrel.Core
+@model VarsityNexusApp.Models.UserModel
+
+@if (Model.PhotoUrl == "")
+{
+    <img src="https://saiuniversity.edu.in/wp-content/uploads/2021/02/default-img.jpg" alt="@Model.Username[0]">
+}
+else
+{
+    <img src="@Model.PhotoUrl" alt="@Model.Username[0]">
+}
+<div class="profile-link">
+    <a href="" class="display-name">@Model.DisplayName</a>
+    <p class="username">@Model.Username</p>
+    <a asp-area="" asp-controller="Account" asp-action="Logout" class="logout-btn">Logout</a>
+</div>

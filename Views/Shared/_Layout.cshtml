@@ -6,29 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] | Varsity Nexus</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    @* <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"> *@
-
-    <script>
-        $(document).ready(function () {
-            $('#followsuggest').load('/Home/FollowSuggest');
-        });
-    </script>
-
-    <script src="~/lib/jquery/dist/jquery.min.js">
-        $(document).ready(function () {
-            $.ajax({
-                type: "GET"
-                url: "/Home/GetFollowSuggestAsync",
-                success: function (data) {
-                    alert(data);
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -37,20 +17,20 @@
             <div class="nav-logo"><img src="./img/logo.png" alt="nexus_logo"></div>
             <div class="nav-links">
                 <ul>
-                    <li class="nav-items current-page"><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                    <li class="nav-items"><a href="#"><i class="fas fa-hashtag"></i> Explore</a></li>
-                    <li class="nav-items"><a href="#"><i class="far fa-bell"></i> Notifications</a></li>
-                    <li class="nav-items"><a href="#"><i class="far fa-user"></i> Profile</a></li>
+                    <li class="nav-items"><a id="Home" asp-area="" asp-controller="Home" asp-action="Index"><i
+                                class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-items"><a id="Home" asp-area="" asp-controller="Home" asp-action="Explore"><i
+                                class="fas fa-hashtag"></i> Explore</a></li>
+                    <li class="nav-items"><a id="Home" asp-area="" asp-controller="Home" asp-action="Notifications"><i
+                                class="far fa-bell"></i> Notifications</a></li>
+                    <li class="nav-items"><a id="Home" asp-area="" asp-controller="Home" asp-action="Messages"><i
+                                class="fas fa-inbox"></i> Message</a></li>
+                    <li class="nav-items"><a id="Home" asp-area="" asp-controller="Home" asp-action="Profile"><i
+                                class="far fa-user"></i> Profile</a></li>
                 </ul>
             </div>
 
-            <div class="profile-box">
-                <img src="./img/profile.jpg" alt="profile">
-                <div class="profile-link">
-                    <a href="" class="full-name">David Herbert</a>
-                    <p class="user-name">king.david</p>
-                </div>
-
+            <div id="profile-display" class="profile-box">
             </div>
         </div>
 
@@ -60,7 +40,7 @@
 
         <div class="right-flex-container">
 
-            @using (Html.AjaxBeginForm("Search", "Home", FormMethod.Post, new AjaxOptions
+            @using (Html.AjaxBeginForm("Search", "Partials", FormMethod.Post, new AjaxOptions
              {
                  InsertionMode = InsertionMode.Replace,
                  HttpMethod = "POST",
@@ -110,11 +90,23 @@
             })();
         });
     </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/app.js" asp-append-version="true"></script>
     @Html.RenderUnobtrusiveAjaxScript()
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $('#profile-display').load("/Partials/UserProfile");
+        $('#followsuggest').load("/Partials/FollowSuggest");
+    </script>
+
+    @if (ViewData["Active"] != null)
+    {
+        <script type="text/javascript">
+            document.getElementById("@ViewData["Active"]").style.color = "#f6703d";
+        </script>
+    }
 </body>
 
 </html>

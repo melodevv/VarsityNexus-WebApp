@@ -10,6 +10,7 @@ namespace VarsityNexusApp.Models
     [FirestoreData]
     public class PostModel
     {
+        public UserModel PostOwner { get; set; }
         [FirestoreProperty]
         public string PostId { get; set; }
 
