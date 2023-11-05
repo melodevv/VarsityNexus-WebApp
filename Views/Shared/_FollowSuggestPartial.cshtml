@@ -1,0 +1,30 @@
+@using Microsoft.AspNetCore.Server.Kestrel.Core
+@model IEnumerable<VarsityNexusApp.Models.UserModel>
+
+@if (Model.Count() == 0)
+{
+    <p class="text-error">No user suggestions at the moment!</p>
+}
+else
+{
+
+    @foreach (var user in Model)
+    {
+        <div class="follow-user">
+
+    <div class="title-container">
+        <div class="user-pics">
+            <img src="@user.PhotoUrl" alt="user6">
+        </div>
+        <div class="usernames">
+            <p class="display-name">@user.DisplayName</p>
+
+            <p class="user-name">@user.Username</p>
+        </div>
+
+    </div>
+    <div class="follow-btn"><a href="#">follow</a></div>
+</div>
+    }
+
+}

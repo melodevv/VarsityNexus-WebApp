@@ -1,4 +1,5 @@
-﻿using Google.Cloud.Firestore;
+﻿using Firebase.Auth;
+using Google.Cloud.Firestore;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -39,10 +40,10 @@ namespace VarsityNexusApp.Controllers
             return View();
         }
 
-        public async Task<List<UserModel>> GetPostsAsync(string query)
+        public async Task<List<UserModel>> GetSearchAsync(string query)
         {
             Query usersQuery = _firestoreDb.Collection("users");
-            QuerySnapshot userQuerySnapshot = await usersQuery.WhereEqualTo("username", query).WhereEqualTo("displayName", query).GetSnapshotAsync();
+            QuerySnapshot userQuerySnapshot = await usersQuery.WhereEqualTo("username", query).GetSnapshotAsync();
             List<UserModel> listUsers = new List<UserModel>();
 
             foreach (DocumentSnapshot snapshot in userQuerySnapshot.Documents)
@@ -52,17 +53,11 @@ namespace VarsityNexusApp.Controllers
                     Dictionary<string, object> user = snapshot.ToDictionary();
                     string json = JsonConvert.SerializeObject(user);
                     UserModel newUser = JsonConvert.DeserializeObject<UserModel>(json);
-                    newUser.UserId = snapshot.Id;
+                    newUser.Id = snapshot.Id;
                     listUsers.Add(newUser);
                 }
             }
             return listUsers;
-        }
-
-        [HttpGet]
-        public ActionResult Search()
-        {
-            return PartialView("_SearchFormPartial");
         }
 
         [HttpPost]
@@ -72,7 +67,7 @@ namespace VarsityNexusApp.Controllers
             {
                 try
                 {
-                    List<UserModel> searchList = await GetPostsAsync(query);
+                    List<UserModel> searchList = await GetSearchAsync(query);
 
                     return PartialView("_SearchResultsPartial", searchList);
                 }
@@ -82,6 +77,45 @@ namespace VarsityNexusApp.Controllers
                     error.RequestId = e.Message;
                     PartialView("Error", error);
                 }
+            }
+            return PartialView("Error");
+        }
+
+        public async Task<List<UserModel>> GetFollowSuggestAsync()
+        {
+            Query usersQuery = _firestoreDb.Collection("users");
+            QuerySnapshot userQuerySnapshot = await usersQuery.GetSnapshotAsync();
+            List<UserModel> listUsers = new List<UserModel>();
+
+            foreach (DocumentSnapshot snapshot in userQuerySnapshot.Documents)
+            {
+                if (snapshot.Exists)
+                {
+                    Dictionary<string, object> user = snapshot.ToDictionary();
+                    string json = JsonConvert.SerializeObject(user);
+                    UserModel newUser = JsonConvert.DeserializeObject<UserModel>(json);
+                    newUser.Id = snapshot.Id;
+                    listUsers.Add(newUser);
+                }
+            }
+            return listUsers;
+        }
+
+        [HttpGet]
+        public async Task<PartialViewResult> FollowSuggest()
+        {
+
+            try
+            {
+                List<UserModel> followSuggestList = await GetFollowSuggestAsync();
+
+                return PartialView("_FollowSuggestPartial", followSuggestList);
+            }
+            catch (Exception e)
+            {
+                ErrorViewModel error = new ErrorViewModel();
+                error.RequestId = e.Message;
+                PartialView("Error", error);
             }
             return PartialView("Error");
         }

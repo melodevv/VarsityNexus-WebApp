@@ -9,8 +9,26 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js">
+    @* <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"> *@
+
+    <script>
+        $(document).ready(function () {
+            $('#followsuggest').load('/Home/FollowSuggest');
+        });
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js">
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET"
+                url: "/Home/GetFollowSuggestAsync",
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -65,20 +83,7 @@
 
             <div class="follow">
                 <h2 class="header">Follow Suggest</h2>
-                <div class="follow-user">
-                    <div class="title-container">
-                        <div class="user-pics">
-                            <img src="./img/nsfas.jpg" alt="user6">
-                        </div>
-                        <div class="usernames">
-                            <p class="display-name">Nsfas</p>
-
-                            <p class="user-name">nsfas.org.za</p>
-                        </div>
-
-                    </div>
-                    <div class="follow-btn"><a href="#">follow</a></div>
-                </div>
+                <div id="followsuggest"></div>
             </div>
 
             <div class="right-footer">
@@ -97,7 +102,8 @@
 
     </div>
 
-    <script>$(document).ready(function () {
+    <script>
+        $(document).ready(function () {
             (function () {
                 var url = $("#search-results").data("url");
                 $("#search-results").load(url);

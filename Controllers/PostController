@@ -1,17 +1,17 @@
-﻿using Google.Cloud.Firestore;
+using Google.Cloud.Firestore;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using VarsityNexusApp.Models;
 
 namespace VarsityNexusApp.Controllers
 {
-    public class UserController : Controller
+    public class PostController : Controller
     {
         private string directory = "varsity-nexus-843009bba24e.json";
         private string projectId;
         private FirestoreDb _firestoreDb;
 
-        public UserController()
+        public PostController()
         {
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", directory);
             projectId = "varsity-nexus";
@@ -31,7 +31,7 @@ namespace VarsityNexusApp.Controllers
                     Dictionary<string, object> user = snapshot.ToDictionary();
                     string json = JsonConvert.SerializeObject(user);
                     UserModel newUser = JsonConvert.DeserializeObject<UserModel>(json);
-                    newUser.Id = snapshot.Id;
+                    newUser.UserId = snapshot.Id;
                     listUsers.Add(newUser);
                 }
             }

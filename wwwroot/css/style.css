@@ -458,7 +458,30 @@ ul {
   width: 90%;
 }
 
-/* Trending Nav Items */
+.search-user {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+}
+
+.view-btn a {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--btn-color);
+  padding: 0.3rem 1.1rem;
+  border: 1px solid var(--btn-color);
+  border-radius: 25px;
+}
+
+.view-btn a:hover {
+  background: var(--nexus-color);
+  border: none;
+  color: var(--light-font);
+}
+
+/* Follow Nav Items */
 
 .follow {
   background-color: var(--backgroundcolor-interface);
@@ -466,8 +489,10 @@ ul {
   flex-flow: column nowrap;
   width: 90%;
   border-radius: 15px;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
+
+
 
 .follow .header {
   font-size: 1.3rem;
@@ -555,7 +580,8 @@ ul {
   margin: 0;
 }
 
-.follow-user img {
+.follow-user img,
+.search-user img {
   display: inline-block;
   margin-right: 10px;
   width: 45px;

@@ -11,7 +11,7 @@ namespace VarsityNexusApp.Models
     public class UserModel
     {
         [FirestoreProperty]
-        public string UserId { get; set; }
+        public string Id { get; set; }
 
         [FirestoreProperty]
         public string DisplayName { get; set; }
@@ -30,6 +30,21 @@ namespace VarsityNexusApp.Models
 
         [FirestoreProperty]
         public string Bio { get; set; }
+
+        [FirestoreProperty]
+        public string DateOfBirth { get; set; }
+
+        [FirestoreProperty]
+        public string Gender { get; set; }
+
+        [FirestoreProperty]
+        public string StudyLevel { get; set; }
+
+        [FirestoreProperty]
+        public string Institution { get; set; }
+
+        [FirestoreProperty]
+        public string StudyYear { get; set; }
 
         [FirestoreProperty]
         public Timestamp SignedUpAt { get; set; }
