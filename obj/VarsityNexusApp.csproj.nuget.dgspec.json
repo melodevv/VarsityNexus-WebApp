@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/melodev/Github/Dotnet/VarsityNexus-WebApp/VarsityNexusApp.csproj": {}
+    "C:\\Repos\\VNWA2\\VarsityNexus-WebApp\\VarsityNexusApp.csproj": {}
   },
   "projects": {
-    "/home/melodev/Github/Dotnet/VarsityNexus-WebApp/VarsityNexusApp.csproj": {
+    "C:\\Repos\\VNWA2\\VarsityNexus-WebApp\\VarsityNexusApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/melodev/Github/Dotnet/VarsityNexus-WebApp/VarsityNexusApp.csproj",
+        "projectUniqueName": "C:\\Repos\\VNWA2\\VarsityNexus-WebApp\\VarsityNexusApp.csproj",
         "projectName": "VarsityNexusApp",
-        "projectPath": "/home/melodev/Github/Dotnet/VarsityNexus-WebApp/VarsityNexusApp.csproj",
-        "packagesPath": "/home/melodev/.nuget/packages/",
-        "outputPath": "/home/melodev/Github/Dotnet/VarsityNexus-WebApp/obj/",
+        "projectPath": "C:\\Repos\\VNWA2\\VarsityNexus-WebApp\\VarsityNexusApp.csproj",
+        "packagesPath": "C:\\Users\\gundo\\.nuget\\packages\\",
+        "outputPath": "C:\\Repos\\VNWA2\\VarsityNexus-WebApp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/melodev/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\gundo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -82,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/melodev/.dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
