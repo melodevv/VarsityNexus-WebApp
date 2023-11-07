@@ -112,6 +112,7 @@ namespace VarsityNexusApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
+            // Check if the form entry is valid
             if (ModelState.IsValid)
             {
                 try

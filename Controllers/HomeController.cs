@@ -60,10 +60,12 @@ namespace VarsityNexusApp.Controllers
         public async Task<IActionResult> Index()
         {
             var token = HttpContext.Session.GetString("_UserToken");
+            // Check if the user is authenticated
             if (token != null)
             {
                 try
                 {
+                    // Get all the posts on the database and display on page
                     List<PostModel> posts = await GetPostModelsAsync();
                     return View(posts);
                 }
